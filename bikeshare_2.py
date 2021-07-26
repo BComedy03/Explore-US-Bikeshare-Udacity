@@ -27,8 +27,8 @@ def get_filters():
 
     # get user input for month (all, january, february, ... , june)
     while True:
-        month = input("\nWhich month would you like to filter by? January, February, March, April, May, June or type 'all' if you do not have any preference.\n")
-        if month not in ('January', 'February', 'March', 'April', 'May', 'June', 'all'):
+        month = input("\nWhich month would you like to filter by? January, February, March, April, May, June or type 'all' if you do not have any preference.\n").lower()
+        if month not in ('january', 'february', 'march', 'april', 'may', 'june', 'all'):
             print("Sorry, I didn't catch that. Try again.")
             continue
         else:
@@ -36,8 +36,8 @@ def get_filters():
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
-     day = input("\nAre you looking for particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or                   type 'all' if you do not have any preference. \n")
-     if day not in ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'all'):
+     day = input("\nAre you looking for particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or type 'all' if you do not have any preference. \n").lower()
+     if day not in ('Sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all'):
         print("Sorry, I didn't catch that. Try again.")
         continue
      else:
@@ -60,7 +60,7 @@ def load_data(city, month, day):
     """
     
     # load data file into a dataframe
-    df = pd.read_csv('{}.csv'.format(city))
+    df = pd.read_csv(CITY_DATA[city])
 
     # convert the Start Time to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -107,7 +107,7 @@ def time_stats(df):
     popular_hour = df['hour'].mode()[0]
     print('Most Common Hour:', popular_hour)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % round((time.time() - start_time),4))
     print('-'*40)
 
 
@@ -129,7 +129,7 @@ def station_stats(df):
     combination_station = df.groupby(['Start Station', 'End Station']).count()
     print('Most Commonly used combination of start station and end sation trip:', start_station, " & ", end_station)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % round((time.time() - start_time),4))
     print('-'*40)
 
 
@@ -147,7 +147,7 @@ def trip_duration_stats(df):
     Mean_Travel_Time = df['Trip Duration'].mean()
     print('Mean Travel Time:', round(Mean_Travel_Time/60,2), "Minutes")
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % round((time.time() - start_time),4))
     print('-'*40)
 
 
@@ -187,7 +187,7 @@ def user_stats(df):
     except KeyError:
         print("\nMost Common Year:\nNo data available for this month.")
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % round((time.time() - start_time),4))
     print('-'*40)
 
 
