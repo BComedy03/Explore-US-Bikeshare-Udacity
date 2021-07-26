@@ -18,8 +18,13 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
+<<<<<<< HEAD
         city = input("\nWhich city would you like to filter by? New York City, Chicago or Washington? \n").lower()
         if city not in ('new york city', 'chicago', 'washington'):
+=======
+        city = input("\nWhich city would you like to filter by? New York City, Chicago or Washington? \n")
+        if city not in ('New York City', 'Chicago', 'Washington'):
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
             print ("Sorry, I didn't catch that. Try again.")
             continue
         else:
@@ -27,8 +32,13 @@ def get_filters():
 
     # get user input for month (all, january, february, ... , june)
     while True:
+<<<<<<< HEAD
         month = input("\nWhich month would you like to filter by? January, February, March, April, May, June or type 'all' if you do not have any preference.\n").lower()
         if month not in ('january', 'february', 'march', 'april', 'may', 'june', 'all'):
+=======
+        month = input("\nWhich month would you like to filter by? January, February, March, April, May, June or type 'all' if you do not have any preference.\n")
+        if month not in ('January', 'February', 'March', 'April', 'May', 'June', 'all'):
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
             print("Sorry, I didn't catch that. Try again.")
             continue
         else:
@@ -36,8 +46,13 @@ def get_filters():
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
+<<<<<<< HEAD
      day = input("\nAre you looking for particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or type 'all' if you do not have any preference.\n").lower()
      if day not in ('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all'):
+=======
+     day = input("\nAre you looking for particular day? If so, kindly enter the day as follows: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or                   type 'all' if you do not have any preference. \n")
+     if day not in ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'all'):
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
         print("Sorry, I didn't catch that. Try again.")
         continue
      else:
@@ -60,19 +75,31 @@ def load_data(city, month, day):
     """
     
     # load data file into a dataframe
+<<<<<<< HEAD
     df = pd.read_csv('{}.csv'.format(city))
+=======
+    df = pd.read_csv(CITY_DATA[city])
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
 
     # convert the Start Time to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract information about month and week day by creating new columns
     df['month'] = df['Start Time'].dt.month
+<<<<<<< HEAD
     df['day_of_week'] = df['Start Time'].dt.day_name()
+=======
+    df['day_of_week'] = df['Start Time'].dt.weekday_name
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
 
     # filter by month applicable
     if month != 'all':
         # use the index list to get the corresponding int
+<<<<<<< HEAD
         months = ['january', 'february', 'march', 'april', 'may', 'june']
+=======
+        months = ['January', 'February', 'March', 'April', 'May', 'June']
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
         month = months.index(month) + 1
     
     # filter by month to create the new dataframe
@@ -139,11 +166,19 @@ def trip_duration_stats(df):
 
     # display total travel time
     Total_Travel_Time = sum(df['Trip Duration'])
+<<<<<<< HEAD
     print('Total Travel Time:', round(Total_Travel_Time/86400,2), " Days")
 
     # display mean travel time
     Mean_Travel_Time = df['Trip Duration'].mean()
     print('Mean Travel Time:', round(Mean_Travel_Time/60,2), "Minutes")
+=======
+    print('Total Travel Time:', Total_Travel_Time/86400, " Days")
+
+    # display mean travel time
+    Mean_Travel_Time = df['Trip Duration'].mean()
+    print('Mean Travel Time:', Mean_Travel_Time/60, "Minutes")
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -156,6 +191,7 @@ def user_stats(df):
     start_time = time.time()
 
     # Display counts of user types
+<<<<<<< HEAD
     user_types = df['User Type'].value_counts()
     print('User Types:\n', user_types)
     
@@ -184,6 +220,15 @@ def user_stats(df):
         print('\nMost Common Year:', Most_Common_Year)
     except KeyError:
         print("\nMost Common Year:\nNo data available for this month.")
+=======
+
+
+    # Display counts of gender
+
+
+    # Display earliest, most recent, and most common year of birth
+
+>>>>>>> 80db9645b18b9c349acd9d5c35887b9f3e716f64
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
