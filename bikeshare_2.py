@@ -191,6 +191,19 @@ def user_stats(df):
     print('-'*40)
 
 
+def view_raw_data(df):
+    while True:
+        view_data = input("\Would you like to see the raw data? Type 'Yes' or 'No'. \n").lower()
+        if view_data == 'yes':
+            row = 0
+            row += 5
+            print(df.head(row)) 
+            print("\n Would you like to view more data")
+        elif view_data not in ('yes', 'no'):
+            print ("Sorry, I didn't catch that. Try again.")
+        else:
+            break
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -200,6 +213,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        view_raw_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
