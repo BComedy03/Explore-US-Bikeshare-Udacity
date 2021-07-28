@@ -1,4 +1,5 @@
 import time
+from typing import Counter
 import pandas as pd
 import numpy as np
 
@@ -170,19 +171,19 @@ def user_stats(df):
 
     # Display earliest, most recent, and most common year of birth
     try:
-        Earliest_Year = df['Birth Year'].min()
+        Earliest_Year = int(df['Birth Year'].min())
         print('\nEarliest Year:', Earliest_Year)
     except KeyError:
         print("\nEarliest Year:\nNo data available for this month.")
 
     try:
-        Most_Recent_Year = df['Birth Year'].max()
+        Most_Recent_Year = int(df['Birth Year'].max())
         print('\nMost Recent Year:', Most_Recent_Year)
     except KeyError:
         print("\nMost Recent Year:\nNo data available for this month.")
 
     try:
-        Most_Common_Year = df['Birth Year'].value_counts().idxmax()
+        Most_Common_Year = int(df['Birth Year'].value_counts().idxmax())
         print('\nMost Common Year:', Most_Common_Year)
     except KeyError:
         print("\nMost Common Year:\nNo data available for this month.")
@@ -192,17 +193,23 @@ def user_stats(df):
 
 
 def view_raw_data(df):
+    """Displays 5 rows of data from the csv file for the selected city.
+    Args:
+        param1 (df): The data frame you wish to work with.
+    Returns:
+        None.
+    """
+    i = 0
+    view_data = input("\Would you like to see the raw data? Type 'Yes' or 'No'. \n").lower()
     while True:
-        view_data = input("\Would you like to see the raw data? Type 'Yes' or 'No'. \n").lower()
-        if view_data == 'yes':
-            row = 0
-            row += 5
-            print(df.head(row)) 
-            print("\n Would you like to view more data")
-        elif view_data not in ('yes', 'no'):
-            print ("Sorry, I didn't catch that. Try again.")
-        else:
+        if view_data == 'no':
             break
+        elif view_data == 'yes':
+            print(df[i:i+5]) 
+            view_data = input("\n Would you like to view more data\n").lower()
+            i += 5
+        else:
+            view_data = input("\nYour input is invalid. Please enter only 'yes' or 'no'\n").lower()
 
 def main():
     while True:
